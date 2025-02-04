@@ -5,7 +5,7 @@ A simple utility to reset the Cursor editor AppImage on Linux systems.
 ## One-Click Installation
 
 ```bash
-curl -o /tmp/reset.sh https://raw.githubusercontent.com/EbadiDev/cursor-restart-linux-appimage/main/linux/bash.sh && chmod +x /tmp/bash.sh && sudo /tmp/bash.sh
+curl -o /tmp/bash.sh https://raw.githubusercontent.com/EbadiDev/cursor-restart-linux-appimage/main/linux/bash.sh && chmod +x /tmp/bash.sh && sudo /tmp/bash.sh
 ```
 
 ## What does this do?
