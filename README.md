@@ -60,12 +60,18 @@ sudo ./bash.sh
 ## Requirements
 
 - Linux operating system
-- curl (for one-click installation)
-- sudo privileges
 - python3
-- uuidgen
-- dmidecode
 - appimagetool (for repacking the AppImage)
+
+## Tested Environments
+
+### Arch Linux
+- Package: [cursor-bin](https://aur.archlinux.org/packages/cursor-bin)
+- Version: 0.45.9-1
+
+```bash
+sudo yay -S cursor-bin
+```
 
 ## Contributing
 
