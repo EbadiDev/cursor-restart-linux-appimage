@@ -121,6 +121,9 @@ NEW_DEV_DEVICE_ID=$(uuidgen)
 NEW_SQM_ID="{$(uuidgen | tr '[:lower:]' '[:upper:]')}"
 
 if [ -f "$STORAGE_JSON" ]; then
+    # Remove immutable attribute if it exists
+    chattr -i "$STORAGE_JSON" 2>/dev/null || true
+    
     cp "$STORAGE_JSON" "${STORAGE_JSON}.bak" || {
         echo "Error: Unable to backup storage.json."
         exit 1
@@ -143,6 +146,11 @@ except Exception as e:
     echo "Error: Python script execution failed while updating storage.json."
     exit 1
 }
+
+    # Make storage.json immutable to prevent changes
+    chattr +i "$STORAGE_JSON" || {
+        echo "Warning: Failed to make storage.json immutable. You may want to run: sudo chattr +i $STORAGE_JSON"
+    }
 fi
 
 # Change ownership of the fake commands and backup directories

@@ -39,6 +39,21 @@ The script is designed to help reset Cursor's identity on your system while main
 - Modifies the AppImage in `/opt/cursor-bin`
 - Updates shell configuration (`.zshrc`, `.bashrc`, or `.profile`)
 - Preserves file permissions and ownership
+- Protects configuration from changes:
+  - Locks `storage.json` with `chattr +i` after modification
+  - Use `sudo chattr -i ~/.config/Cursor/User/globalStorage/storage.json` to unlock if needed
+
+### Protection Mechanism
+
+After running the script, the `storage.json` file will be made immutable using `chattr +i`. This prevents any accidental or automatic modifications to your Cursor identity. If you need to make changes later:
+
+```bash
+# To unlock the file for changes:
+sudo chattr -i ~/.config/Cursor/User/globalStorage/storage.json
+
+# To lock the file after changes:
+sudo chattr +i ~/.config/Cursor/User/globalStorage/storage.json
+```
 
 ## Manual Installation
 
@@ -62,15 +77,22 @@ sudo ./bash.sh
 - Linux operating system
 - python3
 - appimagetool (for repacking the AppImage)
+- chattr (for file protection)
 
 ## Tested Environments
 
 ### Arch Linux
 - Package: [cursor-bin](https://aur.archlinux.org/packages/cursor-bin)
 - Version: 0.45.9-1
+- Dependencies:
+  - fuse2
+  - gtk3
+
+The script has been successfully tested with the AUR package installation of Cursor. Make sure you have the required dependencies installed through pacman before running the reset script.
 
 ```bash
-sudo yay -S cursor-bin
+# Install dependencies
+sudo pacman -S fuse2 gtk3
 ```
 
 ## Contributing
